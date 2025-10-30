@@ -1,0 +1,50 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-black text-gray-100;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Roboto Mono', monospace;
+  }
+}
+
+@layer components {
+  .input-field {
+    @apply w-full px-4 py-3 bg-zinc-900 border border-zinc-800 rounded-xl 
+           focus:ring-2 focus:ring-slate-600 focus:border-slate-600 
+           transition-all text-gray-100 placeholder-gray-600;
+  }
+
+  /* Make datetime-local calendar icon visible */
+  input[type="datetime-local"] {
+    color-scheme: dark;
+  }
+
+  input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+    filter: invert(0.7) brightness(1.2);
+    cursor: pointer;
+  }
+
+  .btn-primary {
+    @apply px-6 py-3 bg-gradient-to-r from-slate-700 to-slate-800 
+           text-slate-200 rounded-xl font-bold hover:from-slate-600 
+           hover:to-slate-700 transition-all duration-200 shadow-lg 
+           hover:shadow-slate-700/50 active:scale-95 border border-slate-600/50;
+  }
+
+  .btn-secondary {
+    @apply px-6 py-3 bg-zinc-900 text-gray-200 rounded-xl font-semibold 
+           border border-zinc-800 hover:bg-zinc-800 hover:border-zinc-700
+           transition-all duration-200 active:scale-95;
+  }
+
+  .card {
+    @apply bg-zinc-900 border border-zinc-800 rounded-2xl shadow-xl;
+  }
+}
+
