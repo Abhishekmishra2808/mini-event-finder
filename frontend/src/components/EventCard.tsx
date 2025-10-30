@@ -157,22 +157,6 @@ export const EventCard: React.FC<EventCardProps> = ({ event }) => {
             {event.description}
           </p>
 
-          {/* Tags */}
-          <div className="mb-4 min-h-[2rem]">
-          {event.tags && event.tags.length > 0 && (
-            <div className="flex flex-wrap gap-2">
-              {event.tags.slice(0, 3).map((tag) => (
-                <span
-                  key={tag}
-                  className="text-xs px-2 py-1 bg-zinc-800 text-gray-400 rounded-full border border-zinc-700"
-                >
-                  #{tag}
-                </span>
-              ))}
-            </div>
-          )}
-          </div>
-
           {/* Date and Location - Emphasized with primary text color */}
           <div className="space-y-2 mb-4 flex-1">
             <div className="flex items-center text-sm text-[#F5F5F5] transition-colors">
@@ -190,26 +174,34 @@ export const EventCard: React.FC<EventCardProps> = ({ event }) => {
             </div>
           </div>
 
-          {/* Participants - Subtle separator and emphasized numbers */}
-          <div className="flex items-center justify-between pt-4 border-t border-[#2C2C2C] transition-colors mt-auto">
+          {/* Participants */}
+          <div className="flex items-center justify-between mb-4 pt-4 border-t border-[#2C2C2C] transition-colors">
             <div className="text-sm">
               <span className={`font-bold text-[#F5F5F5] ${isFull ? 'text-red-400' : isAlmostFull ? 'text-orange-400' : ''}`}>
                 {event.currentParticipants} / {event.maxParticipants}
               </span>
               <span className="text-[#808080] ml-1">attending</span>
             </div>
-            {isFull ? (
-              <span className="text-xs font-bold text-red-400 bg-red-500/20 px-2 py-1 rounded-full border border-red-500/30 transition-colors">
-                Full
-              </span>
-            ) : isAlmostFull ? (
+            {isAlmostFull && !isFull && (
               <span className="text-xs font-bold text-orange-400 bg-orange-500/20 px-2 py-1 rounded-full border border-orange-500/30 transition-colors">
                 Almost Full
               </span>
+            )}
+          </div>
+
+          {/* Join Event Button */}
+          <div className="mt-auto" onClick={(e) => e.stopPropagation()}>
+            {isFull ? (
+              <div className="w-full bg-zinc-800 border border-zinc-700 text-gray-400 px-6 py-3 rounded-xl font-bold text-center cursor-not-allowed">
+                Sold Out
+              </div>
             ) : (
-              <span className="text-xs font-bold text-green-400 bg-green-500/20 px-2 py-1 rounded-full border border-green-500/30 transition-colors">
-                Available
-              </span>
+              <Link 
+                to={`/event/${event.id}`}
+                className={`block w-full bg-gradient-to-r ${getCategoryColor(event.category)} px-6 py-3 rounded-xl font-bold text-white text-center hover:shadow-lg hover:scale-[1.02] transition-all duration-300`}
+              >
+                Join Event
+              </Link>
             )}
           </div>
         </div>
