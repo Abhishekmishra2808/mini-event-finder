@@ -127,136 +127,64 @@ export const HomePage = () => {
         </div>
       </header>
 
-      {/* HERO SECTION - Split Layout */}
+      {/* HERO SECTION - Full Width */}
       <section className="bg-gradient-to-b from-zinc-900/50 to-black border-b border-zinc-800 relative">
         <div className="max-w-7xl mx-auto px-6 py-16">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 items-stretch">
-            {/* LEFT: The Action */}
-            <div className="lg:col-span-2 space-y-8 flex flex-col">
-              {/* Heading with Gradient Bar */}
-              <div className="flex items-start gap-4">
-                <div className="w-2 h-20 bg-gradient-to-b from-rose-500 via-pink-500 to-fuchsia-600 rounded-full flex-shrink-0"></div>
-                <div>
-                  <h2 className="text-5xl md:text-6xl font-black text-white leading-tight mb-3">
-                    Find Your Next<br />Experience
-                  </h2>
-                  <p className="text-xl text-white/60">Discover events that match your interests</p>
-                </div>
+          <div className="space-y-8">
+            {/* Heading with Gradient Bar */}
+            <div className="flex items-start gap-4">
+              <div className="w-2 h-20 bg-gradient-to-b from-rose-500 via-pink-500 to-fuchsia-600 rounded-full flex-shrink-0"></div>
+              <div>
+                <h2 className="text-5xl md:text-6xl font-black text-white leading-tight mb-3">
+                  Find Your Next<br />Experience
+                </h2>
+                <p className="text-xl text-white/60">Discover events that match your interests</p>
               </div>
+            </div>
 
-              {/* Search Bar - Large & Clean */}
-              <div className="relative group">
-                <div className="absolute inset-y-0 left-0 pl-6 flex items-center pointer-events-none">
-                  <svg className="h-7 w-7 text-white/40 group-hover:text-white/60 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                  </svg>
-                </div>
-                <input
-                  type="text"
-                  placeholder="Search events by title, description, or location..."
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  className="w-full pl-16 pr-6 py-5 text-xl bg-zinc-900/80 backdrop-blur-sm border-2 border-zinc-800 rounded-2xl focus:ring-2 focus:ring-pink-500 focus:border-pink-500 transition-all text-white placeholder-white/40 hover:border-zinc-700"
-                />
-                {searchTerm && (
-                  <button
-                    onClick={() => setSearchTerm('')}
-                    className="absolute inset-y-0 right-0 pr-6 flex items-center text-white/40 hover:text-white"
-                  >
-                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                  </button>
-                )}
+            {/* Search Bar - Large & Clean */}
+            <div className="relative group">
+              <div className="absolute inset-y-0 left-0 pl-6 flex items-center pointer-events-none">
+                <svg className="h-7 w-7 text-white/40 group-hover:text-white/60 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
               </div>
-
-              {/* Use My Location Button - Gradient */}
-              {!locationEnabled ? (
+              <input
+                type="text"
+                placeholder="Search events by title, description, or location..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="w-full pl-16 pr-6 py-5 text-xl bg-zinc-900/80 backdrop-blur-sm border-2 border-zinc-800 rounded-2xl focus:ring-2 focus:ring-pink-500 focus:border-pink-500 transition-all text-white placeholder-white/40 hover:border-zinc-700"
+              />
+              {searchTerm && (
                 <button
-                  onClick={requestLocation}
-                  disabled={locationLoading}
-                  className={`flex items-center gap-3 bg-gradient-to-r from-rose-500 via-pink-500 to-fuchsia-600 text-white px-8 py-4 rounded-full font-bold text-lg hover:scale-105 transition-all shadow-lg shadow-pink-500/30 ${
-                    locationLoading ? 'opacity-75 cursor-wait' : ''
-                  }`}
+                  onClick={() => setSearchTerm('')}
+                  className="absolute inset-y-0 right-0 pr-6 flex items-center text-white/40 hover:text-white"
                 >
-                  {locationLoading ? (
-                    <>
-                      <svg className="w-6 h-6 animate-spin" fill="none" viewBox="0 0 24 24">
-                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                      </svg>
-                      <span>Getting your location...</span>
-                    </>
-                  ) : (
-                    <>
-                      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                      </svg>
-                      <span>Use My Location</span>
-                    </>
-                  )}
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
                 </button>
-              ) : (
-                <div className="bg-zinc-900/80 backdrop-blur-sm border-2 border-zinc-800 rounded-2xl p-6">
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="flex items-center gap-3">
-                      <div className="bg-green-500 p-2 rounded-full">
-                        <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
-                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                        </svg>
-                      </div>
-                      <span className="text-lg font-bold text-white">Location Enabled</span>
-                    </div>
-                    <button
-                      onClick={() => {
-                        setLocationEnabled(false);
-                        setUserLocation(null);
-                      }}
-                      className="text-white/60 hover:text-white text-sm"
-                    >
-                      Disable
-                    </button>
-                  </div>
-                  <div>
-                    <label className="text-sm font-semibold text-white/60 mb-3 block">Search Radius:</label>
-                    <div className="flex gap-2 flex-wrap">
-                      {[5, 10, 25, 50, 100].map((r) => (
-                        <button
-                          key={r}
-                          onClick={() => setRadius(r)}
-                          className={`px-4 py-2 rounded-full font-semibold transition-all ${
-                            radius === r
-                              ? 'bg-gradient-to-r from-rose-500 to-fuchsia-600 text-white'
-                              : 'bg-zinc-800 text-white/60 hover:bg-zinc-700'
-                          }`}
-                        >
-                          {r} km
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-                </div>
               )}
             </div>
 
-            {/* RIGHT: Categories Widget - 60% Height */}
-            <div className="bg-zinc-900/80 backdrop-blur-sm border-2 border-zinc-800 rounded-3xl p-6 h-fit lg:max-h-[360px] overflow-y-auto">
-              <h3 className="text-xl font-bold text-white mb-6 flex items-center gap-2 sticky top-0 bg-zinc-900/95 -m-6 p-6 backdrop-blur-sm z-10">
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            {/* HORIZONTAL PILL FILTERS */}
+            <div>
+              <h3 className="text-sm font-semibold text-white/60 mb-4 flex items-center gap-2">
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
                 </svg>
-                Categories
+                Filter by Category
               </h3>
-              <div className="space-y-2 pt-2">
+              <div className="flex flex-wrap gap-3">
                 {categories.map((category) => (
                   <button
                     key={category}
                     onClick={() => setSelectedCategory(category)}
-                    className={`w-full px-4 py-3 rounded-xl font-semibold text-left transition-all ${
+                    className={`px-6 py-3 rounded-full font-bold text-sm transition-all duration-300 ${
                       selectedCategory === category
-                        ? `bg-gradient-to-r ${getCategoryGradient(category)} text-white shadow-lg`
-                        : 'bg-zinc-800/50 text-white/60 hover:bg-zinc-800 hover:text-white'
+                        ? `bg-gradient-to-r ${getCategoryGradient(category)} text-white shadow-lg scale-105`
+                        : 'bg-zinc-800/50 text-white/70 hover:bg-zinc-700/50 hover:text-white border border-zinc-700/50'
                     }`}
                   >
                     {category}
@@ -264,6 +192,75 @@ export const HomePage = () => {
                 ))}
               </div>
             </div>
+
+            {/* Use My Location Button - Gradient */}
+            {!locationEnabled ? (
+              <button
+                onClick={requestLocation}
+                disabled={locationLoading}
+                className={`flex items-center gap-3 bg-gradient-to-r from-rose-500 via-pink-500 to-fuchsia-600 text-white px-8 py-4 rounded-full font-bold text-lg hover:scale-105 transition-all shadow-lg shadow-pink-500/30 ${
+                  locationLoading ? 'opacity-75 cursor-wait' : ''
+                }`}
+              >
+                {locationLoading ? (
+                  <>
+                    <svg className="w-6 h-6 animate-spin" fill="none" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    <span>Getting your location...</span>
+                  </>
+                ) : (
+                  <>
+                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg>
+                    <span>Use My Location</span>
+                  </>
+                )}
+              </button>
+            ) : (
+              <div className="bg-zinc-900/80 backdrop-blur-sm border-2 border-zinc-800 rounded-2xl p-6">
+                <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center gap-3">
+                    <div className="bg-green-500 p-2 rounded-full">
+                      <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                      </svg>
+                    </div>
+                    <span className="text-lg font-bold text-white">Location Enabled</span>
+                  </div>
+                  <button
+                    onClick={() => {
+                      setLocationEnabled(false);
+                      setUserLocation(null);
+                    }}
+                    className="text-white/60 hover:text-white text-sm"
+                  >
+                    Disable
+                  </button>
+                </div>
+                <div>
+                  <label className="text-sm font-semibold text-white/60 mb-3 block">Search Radius:</label>
+                  <div className="flex gap-2 flex-wrap">
+                    {[5, 10, 25, 50, 100].map((r) => (
+                      <button
+                        key={r}
+                        onClick={() => setRadius(r)}
+                        className={`px-4 py-2 rounded-full font-semibold transition-all ${
+                          radius === r
+                            ? 'bg-gradient-to-r from-rose-500 to-fuchsia-600 text-white'
+                            : 'bg-zinc-800 text-white/60 hover:bg-zinc-700'
+                        }`}
+                      >
+                        {r} km
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
         </div>
 

@@ -93,6 +93,14 @@ export const EventDetailPage = () => {
   const [showCopied, setShowCopied] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
+  // Redirect if no ID
+  useEffect(() => {
+    if (!id) {
+      console.error('No event ID provided');
+      navigate('/', { replace: true });
+    }
+  }, [id, navigate]);
+
   // Sticky header on scroll
   useEffect(() => {
     const handleScroll = () => {
@@ -106,6 +114,9 @@ export const EventDetailPage = () => {
     queryKey: ['event', id],
     queryFn: () => eventApi.getEventById(id!),
     enabled: !!id,
+    retry: 3, // Retry 3 times on failure
+    retryDelay: (attemptIndex) => Math.min(1000 * 2 ** attemptIndex, 30000),
+    staleTime: 0, // Always fetch fresh data
   });
 
   const { data: allEvents } = useQuery({
@@ -147,12 +158,26 @@ export const EventDetailPage = () => {
   }
 
   if (isError || !event) {
+    // Log the error for debugging
+    console.error('Event not found or error loading event. ID:', id);
+    
     return (
       <div className="min-h-screen bg-black flex items-center justify-center">
-        <div className="text-center">
-          <h2 className="text-2xl font-bold text-white mb-2">EVENT NOT FOUND</h2>
-          <p className="text-white/60 mb-6">The event you're looking for doesn't exist.</p>
-          <button onClick={() => navigate('/')} className="btn-primary">
+        <div className="text-center max-w-md mx-auto px-6">
+          <div className="mb-6">
+            <svg className="w-20 h-20 mx-auto text-red-500/50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+            </svg>
+          </div>
+          <h2 className="text-3xl font-bold text-white mb-4">Event Not Found</h2>
+          <p className="text-white/60 mb-8 leading-relaxed">
+            The event you're looking for doesn't exist or has been removed.
+            {id && <span className="block mt-2 text-sm text-white/40">Event ID: {id}</span>}
+          </p>
+          <button 
+            onClick={() => navigate('/')} 
+            className="bg-gradient-to-r from-rose-500 via-pink-500 to-fuchsia-600 text-white px-8 py-4 rounded-full font-bold text-lg hover:scale-105 transition-all shadow-lg shadow-pink-500/30"
+          >
             Back to Home
           </button>
         </div>

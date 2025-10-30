@@ -94,8 +94,16 @@ export const EventCard: React.FC<EventCardProps> = ({ event }) => {
   const isAlmostFull = availableSpots <= 5 && availableSpots > 0;
   const isFull = availableSpots === 0;
 
+  const handleClick = () => {
+    console.log('Event card clicked. Event ID:', event.id, 'Event Title:', event.title);
+  };
+
   return (
-    <Link to={`/event/${event.id}`} className="block h-full group">
+    <Link 
+      to={`/event/${event.id}`} 
+      className="block h-full group"
+      onClick={handleClick}
+    >
       <div className="bg-zinc-900 backdrop-blur-sm border border-zinc-800 rounded-2xl overflow-hidden hover:scale-[1.02] hover:border-zinc-700 hover:shadow-2xl transition-all duration-300 cursor-pointer shadow-xl h-full flex flex-col">
           {/* Header Image with Category Tag */}
           <div className="relative h-48 overflow-hidden">
