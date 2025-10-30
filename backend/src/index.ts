@@ -9,8 +9,8 @@ const PORT = process.env.PORT || 3000;
 const corsOptions = {
   origin: process.env.NODE_ENV === 'production' 
     ? [
-        'https://mini-event-finder-web.onrender.com', // Replace with your actual Render frontend URL
-        /\.onrender\.com$/ // Allow all Render subdomains during testing
+        process.env.FRONTEND_URL || 'https://mini-event-finder.vercel.app',
+        /\.vercel\.app$/ // Allow all Vercel preview deployments
       ]
     : ['http://localhost:5173', 'http://localhost:3000'],
   credentials: true,
@@ -44,3 +44,6 @@ app.listen(PORT, () => {
   console.log(`\n⏰ Started at:       ${new Date().toLocaleString()}`);
   console.log(`\n💡 Tip: Use Ctrl+C to stop the server\n`);
 });
+
+// Export for Vercel serverless
+export default app;
