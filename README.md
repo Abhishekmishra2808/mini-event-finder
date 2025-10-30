@@ -249,20 +249,6 @@ The app includes smart location-based features:
 - Real-time form validation
 - Success navigation to new event
 
-## 🚀 Deployment
-
-The application is ready to deploy on Render.com! See [DEPLOYMENT.md](DEPLOYMENT.md) for detailed instructions.
-
-**Quick Start:**
-1. Push code to GitHub
-2. Connect Render to your repository
-3. Deploy using the included `render.yaml` blueprint
-4. Your app will be live in minutes!
-
-**Live URLs** (after deployment):
-- Frontend: `https://mini-event-finder-web.onrender.com`
-- Backend API: `https://mini-event-finder-api.onrender.com`
-
 ## 🎯 Future Enhancements
 
 - Google Places API integration for autocomplete
