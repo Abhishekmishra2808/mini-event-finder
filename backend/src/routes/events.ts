@@ -12,47 +12,6 @@ let events: Event[] = sampleEvents.map(event => ({
   id: uuidv4(),
 }));
 
-// POST /api/events - Create a new event
-router.post('/', (req: Request, res: Response) => {
-  try {
-    const eventData: CreateEventDTO = req.body;
-
-    // Validate required fields
-    if (!eventData.title || !eventData.description || !eventData.date || 
-        !eventData.maxParticipants || !eventData.location) {
-      return res.status(400).json({ error: 'Missing required fields' });
-    }
-
-    // Create new event
-    const newEvent: Event = {
-      id: uuidv4(),
-      title: eventData.title,
-      description: eventData.description,
-      date: eventData.date,
-      maxParticipants: eventData.maxParticipants,
-      currentParticipants: 0,
-      location: eventData.location
-    };
-
-    events.push(newEvent);
-    return res.status(201).json(newEvent);
-  } catch (error) {
-    return res.status(500).json({ error: 'Failed to create event' });
-  }
-});
-
-// GET /api/events/:id - Get a specific event by ID
-router.get('/:id', (req: Request, res: Response) => {
-  const { id } = req.params;
-  const event = events.find(e => e.id === id);
-
-  if (!event) {
-    return res.status(404).json({ error: 'Event not found' });
-  }
-
-  return res.json(event);
-});
-
 // GET /api/events - Get all events with optional filtering
 router.get('/', (req: Request, res: Response) => {
   try {
@@ -105,6 +64,47 @@ router.get('/', (req: Request, res: Response) => {
     return res.json(filteredEvents);
   } catch (error) {
     return res.status(500).json({ error: 'Failed to fetch events' });
+  }
+});
+
+// GET /api/events/:id - Get a specific event by ID
+router.get('/:id', (req: Request, res: Response) => {
+  const { id } = req.params;
+  const event = events.find(e => e.id === id);
+
+  if (!event) {
+    return res.status(404).json({ error: 'Event not found' });
+  }
+
+  return res.json(event);
+});
+
+// POST /api/events - Create a new event
+router.post('/', (req: Request, res: Response) => {
+  try {
+    const eventData: CreateEventDTO = req.body;
+
+    // Validate required fields
+    if (!eventData.title || !eventData.description || !eventData.date || 
+        !eventData.maxParticipants || !eventData.location) {
+      return res.status(400).json({ error: 'Missing required fields' });
+    }
+
+    // Create new event
+    const newEvent: Event = {
+      id: uuidv4(),
+      title: eventData.title,
+      description: eventData.description,
+      date: eventData.date,
+      maxParticipants: eventData.maxParticipants,
+      currentParticipants: 0,
+      location: eventData.location
+    };
+
+    events.push(newEvent);
+    return res.status(201).json(newEvent);
+  } catch (error) {
+    return res.status(500).json({ error: 'Failed to create event' });
   }
 });
 
