@@ -3,8 +3,6 @@ import { useQuery } from '@tanstack/react-query';
 import { eventApi } from '../services/api';
 import { useState, useEffect } from 'react';
 import { CountdownTimer } from '../components/CountdownTimer';
-import { SaveEventButton } from '../components/SaveEventButton';
-import { EventReminder } from '../components/EventReminder';
 import { SimilarEvents } from '../components/SimilarEvents';
 
 const getCategoryImage = (category?: string) => {
