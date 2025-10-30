@@ -1,6 +1,9 @@
 # Mini Event Finder 🎉
 
-A full-stack event discovery platform built with modern web technologies, featuring a clean Apple-inspired design philosophy. Discover, create, and manage local events with ease.
+A full-stack event discovery platform with a sleek pure black design. Discover, create, and manage local events with advanced features like weather forecasts, saved events, reminders, and location-based filtering.
+
+**Live Demo**: [https://mini-event-finder.vercel.app](https://mini-event-finder.vercel.app)  
+**API**: [https://mini-event-finder-phi.vercel.app](https://mini-event-finder-phi.vercel.app)
 
 ## 🌟 Features
 
@@ -79,33 +82,33 @@ assign/
 
 ### Prerequisites
 - Node.js (v18 or higher)
-- npm or yarn
+- npm
 
-### Installation
+### Local Development
 
-1. **Clone the repository**
-   ```bash
-   cd c:\Users\abhis\Desktop\Projects\assign
-   ```
-
-2. **Set up the Backend**
+1. **Backend Setup**
    ```bash
    cd backend
    npm install
    npm run dev
    ```
-   The backend server will start on `http://localhost:3000`
+   Server runs on `http://localhost:3000`
 
-3. **Set up the Frontend** (in a new terminal)
+2. **Frontend Setup** (new terminal)
    ```bash
    cd frontend
    npm install
    npm run dev
    ```
-   The frontend will start on `http://localhost:5173`
+   App runs on `http://localhost:5173`
 
-4. **Open your browser**
-   Navigate to `http://localhost:5173` to see the application
+### Deployment
+
+Deployed on Vercel with automatic CI/CD from GitHub.
+
+**Environment Variables:**
+- Frontend: `VITE_API_URL` - API endpoint URL
+- Backend: `FRONTEND_URL` - Frontend URL for CORS
 
 ## 📖 API Documentation
 
@@ -189,12 +192,11 @@ GET /api/events?lat=53.3498&lng=-6.2603&radius=50
 
 ## 🎨 Design Philosophy
 
-The UI follows Apple's design principles:
-- **Minimalism** - Clean, uncluttered interfaces
-- **Clarity** - Clear typography and visual hierarchy
-- **Depth** - Subtle shadows and hover effects
-- **Smooth transitions** - Polished animations and interactions
-- **Whitespace** - Generous spacing for better readability
+- **Pure Black Theme** - Modern dark design with #000000 background
+- **Visual Hierarchy** - 4-tier text color system for clarity
+- **Hero Images** - Category-specific Unsplash images
+- **Consistent Layout** - Uniform card heights with flexbox
+- **Smooth Interactions** - Hover effects, scale transforms, loading states
 
 ## 🛠️ Technologies Used
 
@@ -214,40 +216,14 @@ The UI follows Apple's design principles:
 - **Axios** - HTTP client
 - **Tailwind CSS** - Utility-first CSS framework
 
-## 🌍 Geolocation Features
 
-The app includes smart location-based features:
-- **Browser geolocation** - Get user's current position
-- **Distance calculation** - Haversine formula for accurate distances
-- **Radius filtering** - Find events within 5, 10, 25, 50, or 100 km
-- **Distance display** - Shows km away on event cards
-- **Location search** - Filter events by city/location name
 
-## 📱 Screenshots & Features
+## 📱 Key Pages
 
-### Home Page
-- Grid layout of all events
-- Live search bar for instant filtering
-- Location enable/disable toggle
-- Radius selector for distance filtering
-- Loading states with spinner
-- Error handling with clear messages
-
-### Event Detail Page
-- Full event information display
-- Date and time formatting
-- Location with coordinates
-- Participant count with progress bar
-- Available spots indicator
-- Join event button (disabled when full)
-
-### Create Event Page
-- Clean form with validation
-- Date/time picker
-- Location finder (preset cities)
-- Manual coordinate entry option
-- Real-time form validation
-- Success navigation to new event
+- **Home** - Event grid with search, filters, and location-based discovery
+- **Event Detail** - Immersive hero section with weather, reminders, and similar events
+- **Create Event** - Form with location autocomplete and category selection
+- **Saved Events** - Bookmarked events with quick access
 
 ## 🎯 Future Enhancements
 
@@ -266,18 +242,11 @@ The app includes smart location-based features:
 
 This project is open source and available under the MIT License.
 
-## 👨‍💻 Developer Notes
+## 👨‍💻 Author
 
-- The backend uses in-memory storage, so data is lost on server restart
-- Location finder uses preset cities (Dublin, London, Paris, New York, Tokyo)
-- For production, integrate Google Places API for real geocoding
-- All coordinates use WGS84 datum (standard GPS coordinates)
-- Distances are calculated as the crow flies (straight-line distance)
-
-## 🤝 Contributing
-
-Contributions are welcome! Feel free to open issues or submit pull requests.
+**Abhishek Mishra**  
+[GitHub](https://github.com/abhishekmishra2808)
 
 ---
 
-**Built with ❤️ using modern web technologies**
+**Built with ❤️ using React, TypeScript, Node.js, and deployed on Vercel**
