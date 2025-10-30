@@ -128,11 +128,11 @@ export const HomePage = () => {
       </header>
 
       {/* HERO SECTION - Split Layout */}
-      <section className="bg-gradient-to-b from-zinc-900/50 to-black border-b border-zinc-800">
+      <section className="bg-gradient-to-b from-zinc-900/50 to-black border-b border-zinc-800 relative">
         <div className="max-w-7xl mx-auto px-6 py-16">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 items-stretch">
             {/* LEFT: The Action */}
-            <div className="lg:col-span-2 space-y-8">
+            <div className="lg:col-span-2 space-y-8 flex flex-col">
               {/* Heading with Gradient Bar */}
               <div className="flex items-start gap-4">
                 <div className="w-2 h-20 bg-gradient-to-b from-rose-500 via-pink-500 to-fuchsia-600 rounded-full flex-shrink-0"></div>
@@ -240,15 +240,15 @@ export const HomePage = () => {
               )}
             </div>
 
-            {/* RIGHT: Categories Widget */}
-            <div className="bg-zinc-900/80 backdrop-blur-sm border-2 border-zinc-800 rounded-3xl p-6">
-              <h3 className="text-xl font-bold text-white mb-6 flex items-center gap-2">
+            {/* RIGHT: Categories Widget - 60% Height */}
+            <div className="bg-zinc-900/80 backdrop-blur-sm border-2 border-zinc-800 rounded-3xl p-6 h-fit lg:max-h-[360px] overflow-y-auto">
+              <h3 className="text-xl font-bold text-white mb-6 flex items-center gap-2 sticky top-0 bg-zinc-900/95 -m-6 p-6 backdrop-blur-sm z-10">
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
                 </svg>
                 Categories
               </h3>
-              <div className="space-y-2">
+              <div className="space-y-2 pt-2">
                 {categories.map((category) => (
                   <button
                     key={category}
@@ -264,6 +264,15 @@ export const HomePage = () => {
                 ))}
               </div>
             </div>
+          </div>
+        </div>
+
+        {/* Bouncing Arrow - Scroll Indicator */}
+        <div className="flex justify-center mt-8">
+          <div className="animate-bounce">
+            <svg className="w-8 h-8 text-white/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+            </svg>
           </div>
         </div>
       </section>
