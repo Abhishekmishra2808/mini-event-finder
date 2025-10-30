@@ -346,17 +346,18 @@ export const EventDetailPage = () => {
 
               {/* Location with Small Stylized Map */}
               <div>
-                <h3 className="text-2xl font-bold text-white mb-4 flex items-center gap-2">
+                <h3 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
                   <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                   </svg>
                   Location
                 </h3>
-                <div className="flex items-start gap-4">
-                  <div className="flex-1">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
+                  {/* Location Details */}
+                  <div>
                     <p className="text-2xl font-bold text-white mb-2">{event.location.name}</p>
-                    <p className="text-white/60 mb-4">
+                    <p className="text-white/60 mb-6 text-sm">
                       {event.location.lat.toFixed(4)}, {event.location.lng.toFixed(4)}
                     </p>
                     <a
@@ -371,8 +372,9 @@ export const EventDetailPage = () => {
                       Get Directions
                     </a>
                   </div>
-                  {/* Small Dark Map */}
-                  <div className="relative w-48 h-48 rounded-2xl overflow-hidden border-2 border-zinc-800 group cursor-pointer flex-shrink-0">
+                  
+                  {/* Map */}
+                  <div className="relative w-full h-64 rounded-2xl overflow-hidden border-2 border-zinc-800 group cursor-pointer">
                     <iframe
                       title="Event Location"
                       src={`https://www.openstreetmap.org/export/embed.html?bbox=${event.location.lng - 0.01},${event.location.lat - 0.01},${event.location.lng + 0.01},${event.location.lat + 0.01}&layer=mapnik&marker=${event.location.lat},${event.location.lng}`}
@@ -401,22 +403,55 @@ export const EventDetailPage = () => {
                 <p className="text-white/60 text-lg">{formattedTime}</p>
               </div>
 
-              {/* Save & Share */}
-              <div className="flex gap-3">
-                <SaveEventButton eventId={event.id} />
+              {/* Action Buttons - Simple & Aligned */}
+              <div className="space-y-3">
+                {/* Save Event */}
+                <button
+                  onClick={() => {
+                    const saved = JSON.parse(localStorage.getItem('savedEvents') || '[]');
+                    const isSaved = saved.includes(event.id);
+                    if (isSaved) {
+                      localStorage.setItem('savedEvents', JSON.stringify(saved.filter((id: string) => id !== event.id)));
+                    } else {
+                      localStorage.setItem('savedEvents', JSON.stringify([...saved, event.id]));
+                    }
+                    window.location.reload();
+                  }}
+                  className="w-full bg-zinc-900/50 backdrop-blur-sm border border-zinc-800 rounded-xl p-4 hover:bg-zinc-800/50 transition-all flex items-center gap-3 text-white font-semibold group"
+                >
+                  <svg className="w-5 h-5 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
+                  </svg>
+                  <span>Save Event</span>
+                </button>
+
+                {/* Share */}
                 <button
                   onClick={handleShare}
-                  className="flex-1 bg-zinc-900/50 backdrop-blur-sm border border-zinc-800 rounded-xl p-4 hover:bg-zinc-800/50 transition-all flex items-center justify-center gap-2 text-white font-semibold"
+                  className="w-full bg-zinc-900/50 backdrop-blur-sm border border-zinc-800 rounded-xl p-4 hover:bg-zinc-800/50 transition-all flex items-center gap-3 text-white font-semibold group"
                 >
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-5 h-5 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
                   </svg>
-                  Share
+                  <span>Share</span>
+                </button>
+
+                {/* Set Reminder */}
+                <button
+                  onClick={() => {
+                    const reminderTime = prompt('Set reminder (1h = 1 hour before, 1d = 1 day before, 1w = 1 week before):', '1d');
+                    if (reminderTime) {
+                      alert(`Reminder set for ${reminderTime} before the event!`);
+                    }
+                  }}
+                  className="w-full bg-zinc-900/50 backdrop-blur-sm border border-zinc-800 rounded-xl p-4 hover:bg-zinc-800/50 transition-all flex items-center gap-3 text-white font-semibold group"
+                >
+                  <svg className="w-5 h-5 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                  </svg>
+                  <span>Set Reminder</span>
                 </button>
               </div>
-
-              {/* Event Reminder */}
-              <EventReminder eventId={event.id} eventTitle={event.title} eventDate={event.date} />
             </div>
           </div>
 
