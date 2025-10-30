@@ -592,7 +592,7 @@ export const CreateEventPage = () => {
               <button
                 type="submit"
                 disabled={createMutation.isPending}
-                className={`flex-1 bg-gradient-to-r ${getCategoryGradient(formData.category)} text-white px-8 py-5 rounded-2xl font-bold text-xl hover:scale-105 transition-all shadow-lg disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3`}
+                className={`flex-1 bg-gradient-to-r ${getCategoryGradient(formData.category || 'Other')} text-white px-8 py-5 rounded-2xl font-bold text-xl hover:scale-105 transition-all shadow-lg disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3`}
               >
                 {createMutation.isPending ? (
                   <>

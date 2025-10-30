@@ -95,9 +95,8 @@ export const EventCard: React.FC<EventCardProps> = ({ event }) => {
   const isFull = availableSpots === 0;
 
   return (
-    <div className="block relative group h-full">
-      <Link to={`/event/${event.id}`} className="block h-full">
-        <div className="bg-zinc-900 backdrop-blur-sm border border-zinc-800 rounded-2xl overflow-hidden hover:scale-[1.02] hover:border-zinc-700 hover:shadow-2xl transition-all duration-300 cursor-pointer shadow-xl h-full flex flex-col">
+    <Link to={`/event/${event.id}`} className="block h-full group">
+      <div className="bg-zinc-900 backdrop-blur-sm border border-zinc-800 rounded-2xl overflow-hidden hover:scale-[1.02] hover:border-zinc-700 hover:shadow-2xl transition-all duration-300 cursor-pointer shadow-xl h-full flex flex-col">
           {/* Header Image with Category Tag */}
           <div className="relative h-48 overflow-hidden">
             <img 
@@ -190,23 +189,19 @@ export const EventCard: React.FC<EventCardProps> = ({ event }) => {
           </div>
 
           {/* Join Event Button */}
-          <div className="mt-auto" onClick={(e) => e.stopPropagation()}>
+          <div className="mt-auto">
             {isFull ? (
               <div className="w-full bg-zinc-800 border border-zinc-700 text-gray-400 px-6 py-3 rounded-xl font-bold text-center cursor-not-allowed">
                 Sold Out
               </div>
             ) : (
-              <Link 
-                to={`/event/${event.id}`}
-                className={`block w-full bg-gradient-to-r ${getCategoryColor(event.category)} px-6 py-3 rounded-xl font-bold text-white text-center hover:shadow-lg hover:scale-[1.02] transition-all duration-300`}
-              >
+              <div className={`w-full bg-gradient-to-r ${getCategoryColor(event.category)} px-6 py-3 rounded-xl font-bold text-white text-center hover:shadow-lg hover:scale-[1.02] transition-all duration-300`}>
                 Join Event
-              </Link>
+              </div>
             )}
           </div>
         </div>
       </div>
     </Link>
-    </div>
   );
 };
