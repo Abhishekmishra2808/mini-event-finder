@@ -17,8 +17,9 @@ You'll deploy **Backend** and **Frontend** as separate projects on Vercel.
 - **Project Name**: `mini-event-finder-api`
 - **Framework**: Other
 - **Root Directory**: `backend` ⬅️ IMPORTANT!
-- **Build Command**: `npm run build`
-- **Output Directory**: `dist`
+- **Build Command**: Leave empty (Vercel auto-detects)
+- **Output Directory**: Leave empty
+- **Install Command**: `npm install`
 
 ### Step 3: Environment Variables
 ```
@@ -77,10 +78,19 @@ VITE_API_URL = https://mini-event-finder-api.vercel.app/api
 ## ✅ Test Your Deployment
 
 ### Backend:
-Visit: `https://mini-event-finder-api.vercel.app/health`
+Visit: `https://mini-event-finder-api.vercel.app/`
 ```json
-{"status":"ok","message":"Mini Event Finder API is running"}
+{
+  "status":"ok",
+  "message":"Mini Event Finder API is running",
+  "endpoints": {
+    "health": "/api/health",
+    "events": "/api/events"
+  }
+}
 ```
+
+Or test the health endpoint: `https://mini-event-finder-api.vercel.app/api/health`
 
 ### Frontend:
 Visit: `https://mini-event-finder.vercel.app`
