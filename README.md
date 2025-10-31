@@ -2,7 +2,7 @@
 
 A full-stack event discovery platform with a sleek pure black design. Discover, create, and manage local events with advanced features like weather forecasts, saved events, reminders, and location-based filtering.
 
-**Live Demo**: [https://mini-event-finder.vercel.app](https://mini-event-finder.vercel.app)  
+**Live Demo**: [https://mini-event-finder-m43v.vercel.app](https://mini-event-finder-m43v.vercel.app)  
 **API**: [https://mini-event-finder-phi.vercel.app](https://mini-event-finder-phi.vercel.app)
 
 ## 🌟 Features
@@ -224,19 +224,6 @@ GET /api/events?lat=53.3498&lng=-6.2603&radius=50
 - **Event Detail** - Immersive hero section with weather, reminders, and similar events
 - **Create Event** - Form with location autocomplete and category selection
 - **Saved Events** - Bookmarked events with quick access
-
-## 🎯 Future Enhancements
-
-- Google Places API integration for autocomplete
-- User authentication and authorization
-- Event registration/RSVP functionality
-- User-uploaded images for events
-- Social sharing features
-- Email notifications
-- Calendar integration (.ics export)
-- Map view with event markers
-- Persistent database (MongoDB/PostgreSQL)
-- Real-time event updates (WebSocket)
 
 ## 📝 License
 
